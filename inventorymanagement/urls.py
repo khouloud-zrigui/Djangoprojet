@@ -24,4 +24,6 @@ urlpatterns = [
     path('delete/<int:id>/',views.delete_client, name ="delete_client"),
     path('<int:id>/',views.update_client, name ="update_client"),
     path('',views.add_get_produit, name ="add_show_produit"),
+    path('update/<int:id>/',views.update_produit, name ="update_produit"),
+    path('delete/produit/<int:id>/',views.delete_produit, name ="delete_produit"),
     ]

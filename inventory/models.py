@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 #Creation table User-client
 class User(models.Model):
@@ -13,3 +14,5 @@ class Produit(models.Model):
     description = models.CharField(max_length=100)
     quantite =models.IntegerField()
     prix_unit =models.FloatField()
+
+

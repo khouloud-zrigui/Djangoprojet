@@ -59,3 +59,25 @@ def add_get_produit(request):
         fm = ProduitRegistration()   
     prod = Produit.objects.all()
     return render(request,'inventory/add_show_produit.html',{'form':fm, 'prd':prod})    
+
+#Cette fonction permet de modifier les informations produit
+def update_produit(request,id):
+    if request.method =='POST':
+        pr = Produit.objects.get(pk = id)
+        fm = ProduitRegistration(request.POST, instance= pr)
+        if fm.is_valid():
+            fm.save()
+    else:
+        pr = Produit.objects.get(pk =id)
+        fm = ProduitRegistration(instance=pr)
+                
+    return render(request, 'inventory/update_produit.html',{'form':fm})
+
+#cette fonction permet de supprimer les données produit par id
+def delete_produit(request,id):
+    if request.method == 'POST':
+        pr = Produit.objects.get(pk = id)
+        pr.delete()
+        return HttpResponseRedirect('/')
+
+ 

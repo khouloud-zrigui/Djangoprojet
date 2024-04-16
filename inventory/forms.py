@@ -24,3 +24,5 @@ class ProduitRegistration(forms.ModelForm):
             'quantite': forms.TextInput(attrs={'class': 'form-control'}),
             'prix_unit':forms.TextInput(attrs={'class': 'form-control'})
         }
+
+

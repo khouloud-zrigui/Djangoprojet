@@ -20,6 +20,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Quantité</th>
                 <th scope="col">Prix unit</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -30,7 +31,12 @@
                 <td>{{st.description}}</td>
                 <td>{{st.quantite}}</td>
                 <td>{{st.prix_unit}}</td>
-                
+                <td>
+                        <a href="{% url 'update_produit' st.id %}" class="btn btn-warning bt-sm">Modifier</a>
+                        <form action="{% url 'delete_produit' st.id %}" method="post" class="d-inline">
+                          {% csrf_token %}
+                          <input type="submit" class="btn btn-danger bt-sm" value="Supprimer">
+                        </form>
               </tr>
               {% endfor %}
             </tbody>
