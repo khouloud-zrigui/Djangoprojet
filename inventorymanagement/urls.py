@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.add_get_client, name ="add_show_client"),
     path('delete/<int:id>/',views.delete_client, name ="delete_client"),
+    path('<int:id>/',views.update_client, name ="update_client"),
     ]

@@ -26,3 +26,17 @@ def delete_client(request,id):
         pi = User.objects.get(pk = id)
         pi.delete()
         return HttpResponseRedirect('/')
+    
+#Cette fonction permet de modifier les informations client
+def update_client(request,id):
+    if request.method =='POST':
+        pi = User.objects.get(pk = id)
+        fm = ClientRegistration(request.POST, instance=pi)
+        if fm.is_valid():
+            fm.save()
+    else:
+        pi = User.objects.get(pk =id)
+        fm = ClientRegistration(instance=pi)
+                
+    return render(request, 'inventory/update_client.html',{'form':fm})
+    
