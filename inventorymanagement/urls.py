@@ -20,5 +20,6 @@ from inventory import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.add_get_client, name ="add_show_client")
-]
+    path('',views.add_get_client, name ="add_show_client"),
+    path('delete/<int:id>/',views.delete_client, name ="delete_client"),
+    ]

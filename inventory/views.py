@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from .forms import ClientRegistration
 from .models import User
 
@@ -19,3 +19,10 @@ def add_get_client(request):
         fm = ClientRegistration()    
     cli = User.objects.all()
     return render(request,'inventory/add_show_client.html',{'form':fm, 'clit':cli})
+
+#cette fonction permet de supprimer les données client par id
+def delete_client(request,id):
+    if request.method == 'POST':
+        pi = User.objects.get(pk = id)
+        pi.delete()
+        return HttpResponseRedirect('/')
