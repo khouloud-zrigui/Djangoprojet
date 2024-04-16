@@ -20,10 +20,14 @@ from inventory import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('',views.add_get_client, name ="add_show_client"),
-    path('delete/<int:id>/',views.delete_client, name ="delete_client"),
-    path('<int:id>/',views.update_client, name ="update_client"),
-    path('',views.add_get_produit, name ="add_show_produit"),
-    path('update/<int:id>/',views.update_produit, name ="update_produit"),
-    path('delete/produit/<int:id>/',views.delete_produit, name ="delete_produit"),
-    ]
+    path('', views.home, name='home'),
+    path('clients/',views.add_get_client, name ="add_show_client"),
+    path('clients/delete/<int:id>/',views.delete_client, name ="delete_client"),
+    path('clients/<int:id>/',views.update_client, name ="update_client"),
+    path('produits/',views.add_get_produit, name ="add_show_produit"),
+    path('produits/update/<int:id>/',views.update_produit, name ="update_produit"),
+    path('produits/delete/<int:id>/',views.delete_produit, name ="delete_produit"),
+    path('commandes/',views.add_get_commande, name ="add_show_commande"),
+    path('commandes/updatecmd/<int:id>/',views.update_commande, name ="update_commande"),
+    path('commandes/delete/<int:id>/',views.delete_commande, name ="delete_commande"),
+]

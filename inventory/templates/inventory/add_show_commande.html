@@ -1,0 +1,54 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert alert-info">Céer une commande</h4>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+<input type="submit" class="btn btn-success" value="Ajouter">
+</form>
+    </div>
+    <div class="col-sm-7 offset-1">
+        <h4 class="text-center alert alert-info">Afficher la liste des commande</h4>
+        {% if comd %}
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Cmd id</th>
+                <th scope="col">Produit id</th>
+                <th scope="col">Client id</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for st in comd %}
+              <tr>
+                <th scope="row">{{st.id}}</th>
+                <td>{{st.client_id}}</td>
+                <td>{{st.produit_id}}</td>
+                <td>{{st.quantite_cmd}}</td>
+                <td>{{st.commande_date}}</td>
+                <td  colspan="2">
+                  <a href="{% url 'update_commande' st.id %}" class="btn btn-warning bt-sm">Modifier</a>
+                  <form action="{% url 'delete_produit' st.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger bt-sm" value="Supprimer">
+                  </form>
+                  </td>
+                </tr>
+                    {% endfor %}
+            </tbody>
+          </table>
+
+        {% else %}
+        <h4 class="text-center alert alert-warning">Pas d'enregistrements</h4>
+        
+        {% endif %}
+    </div>
+    
+
+
+{% endblock content %}

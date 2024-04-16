@@ -1,0 +1,14 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+    <h1>Bienvenue sur la page d'accueil</h1>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <a href="{% url 'add_show_client' %}" class="btn btn-primary">Gérer les clients</a>
+        <a href="{% url 'add_show_produit' %}" class="btn btn-primary">Gérer les produits</a>
+        <a href="{% url 'add_show_commande' %}" class="btn btn-primary">Gérer les commandes</a>
+    </div>
+    
+{% endblock content %}
+

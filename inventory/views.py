@@ -2,7 +2,9 @@ from django.shortcuts import render, HttpResponseRedirect
 from .forms import ClientRegistration
 from .models import User
 from .models import Produit
+from .models import Commande
 from .forms import ProduitRegistration
+from .forms import CommandeRegistration
 
 # Create your views here.
 #Cette fonction permet d'ajouter et d'afficher un client user
@@ -27,7 +29,7 @@ def delete_client(request,id):
     if request.method == 'POST':
         pi = User.objects.get(pk = id)
         pi.delete()
-        return HttpResponseRedirect('/')
+        return render(request,'inventory/add_show_client.html')
     
 #Cette fonction permet de modifier les informations client
 def update_client(request,id):
@@ -80,4 +82,48 @@ def delete_produit(request,id):
         pr.delete()
         return HttpResponseRedirect('/')
 
- 
+#cette fonction permet d'ajouter une commande  
+def add_get_commande(request):
+    if request.method == 'POST':
+        fm = CommandeRegistration(request.POST)
+        if fm.is_valid():
+            cl_id = fm.cleaned_data['client_id']
+            pr_id = fm.cleaned_data['produit_id']
+            qy_cmd = fm.cleaned_data['quantite_cmd']
+            dt_cm = fm.cleaned_data['commande_date']
+           
+            reg = Commande(client_id=cl_id, produit_id=pr_id, quantite_cmd=qy_cmd, commande_date=dt_cm)
+            reg.save()
+            fm = CommandeRegistration()
+            
+    else:
+        fm = CommandeRegistration()   
+    cmd = Commande.objects.all()
+    return render(request, 'inventory/add_show_commande.html', {'form': fm, 'comd': cmd})
+
+
+
+#Cette fonction permet de modifier les informations d'une commande
+def update_commande(request,id):
+    if request.method =='POST':
+        commd = Commande.objects.get(pk = id)
+        fm = CommandeRegistration(request.POST, instance= commd)
+        if fm.is_valid():
+            fm.save()
+    else:
+        commd  = Commande.objects.get(pk =id)
+        fm = CommandeRegistration(instance=commd )
+                
+    return render(request, 'inventory/update_commande.html',{'form':fm})
+
+#cette fonction permet de supprimer les données d'une commande  par id
+def delete_commande(request,id):
+    if request.method == 'POST':
+        commd = Commande.objects.get(pk = id)
+        commd.delete()
+        return HttpResponseRedirect('/')
+
+
+def home(request):
+    return render(request, 'inventory/home.html')
+

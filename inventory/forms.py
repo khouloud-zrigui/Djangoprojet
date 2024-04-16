@@ -2,6 +2,7 @@ from django.core import validators
 from django import forms
 from.models import User
 from.models import Produit
+from.models import Commande
 
 class ClientRegistration(forms.ModelForm):
     class Meta:
@@ -25,4 +26,14 @@ class ProduitRegistration(forms.ModelForm):
             'prix_unit':forms.TextInput(attrs={'class': 'form-control'})
         }
 
+class CommandeRegistration(forms.ModelForm):
+    client_id = forms.ModelChoiceField(queryset=User.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-control'}))
+    produit_id = forms.ModelChoiceField(queryset=Produit.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-control'}))
+    commande_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
 
+    class Meta:
+        model = Commande
+        fields = ['client_id', 'produit_id', 'quantite_cmd', 'commande_date']
+        widgets = {
+            'quantite_cmd': forms.TextInput(attrs={'class': 'form-control'}),
+        }

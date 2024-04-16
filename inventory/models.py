@@ -15,4 +15,12 @@ class Produit(models.Model):
     quantite =models.IntegerField()
     prix_unit =models.FloatField()
 
+#Creation table Commande
+class Commande(models.Model):
+    client_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    produit_id = models.ForeignKey(Produit, on_delete=models.CASCADE)
+    quantite_cmd = models.IntegerField()
+    commande_date = models.DateField()
+ 
+
 
