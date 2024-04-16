@@ -1,7 +1,47 @@
 {% extends 'inventory/base.html' %}
 {% block content %}
-<h4>Ajouter un nouveau produit</h4>
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert alert-info">Ajouter un nouveau produit</h4>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+<input type="submit" class="btn btn-success" value="Ajouter">
+</form>
+    </div>
+    <div class="col-sm-7 offset-1">
+        <h4 class="text-center alert alert-info">Afficher la liste des produits</h4>
+        {% if prd %}
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Code Produit</th>
+                <th scope="col">Nom produit</th>
+                <th scope="col">Description</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix unit</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for st in prd%}
+              <tr>
+                <th scope="row">{{st.id}}</th>
+                <td>{{st.name_prod}}</td>
+                <td>{{st.description}}</td>
+                <td>{{st.quantite}}</td>
+                <td>{{st.prix_unit}}</td>
+                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
 
+        {% else %}
+        <h4 class="text-center alert alert-warning">Pas d'enregistrements</h4>
+        
+        {% endif %}
+    </div>
+    
 
 
 {% endblock content %}
